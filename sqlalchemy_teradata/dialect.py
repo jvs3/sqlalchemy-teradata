@@ -90,7 +90,7 @@ class TeradataDialect(default.DefaultDialect):
     def create_connect_args(self, url):
       if url is not None:
         params = super(TeradataDialect, self).create_connect_args(url)[1]
-        cargs = ("Teradata", params['host'], params['username'], params['password'])
+        cargs = ("Teradata", params['host'], params.get('username', ''), params.get('password', ''))
         cparams = {p:params[p] for p in params if p not in\
                                 ['host', 'username', 'password']}
         return (cargs, cparams)
